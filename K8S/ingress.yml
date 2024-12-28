@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: uber-service-ingress
+  namespace: webapps
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/"  # Optional: To rewrite the URL path
+#    alb.ingress.kubernetes.io/scheme: "internet-facing"
+#    alb.ingress.kubernetes.io/target-type: "ip"
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: uber-service  # The name of your ClusterIP service
+                port:
+                  number: 80  # The port your service is exposed on (internally, via ClusterIP)
+
