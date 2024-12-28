@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: uber-deployment
+  namespace: webapps  
 spec:
   replicas: 1  # Number of desired replicas
   selector:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
       - name: uber
-        image: sevenajay/uber:latest
+        image: psschiatanya/uber:latest
         ports:
         - containerPort: 3000  # Port your application listens on
 
